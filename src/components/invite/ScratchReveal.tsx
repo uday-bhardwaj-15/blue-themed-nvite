@@ -46,14 +46,14 @@ export function ScratchReveal() {
     if (!ctx) return;
 
     const grad = ctx.createLinearGradient(0, 0, SIZE, SIZE);
-    grad.addColorStop(0, "#e6a6b3");
-    grad.addColorStop(0.5, "#c9788d");
-    grad.addColorStop(1, "#b45c73");
+    grad.addColorStop(0, "#b8d7f7");
+    grad.addColorStop(0.5, "#4a86c6");
+    grad.addColorStop(1, "#18457e");
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, SIZE, SIZE);
-    ctx.globalAlpha = 0.25;
+    ctx.globalAlpha = 0.35;
     for (let i = 0; i < 900; i++) {
-      ctx.fillStyle = i % 2 ? "#ffffff" : "#8d4257";
+      ctx.fillStyle = i % 2 ? "#ffffff" : "#d4af37";
       ctx.fillRect(Math.random() * SIZE, Math.random() * SIZE, 2, 2);
     }
     ctx.globalAlpha = 1;

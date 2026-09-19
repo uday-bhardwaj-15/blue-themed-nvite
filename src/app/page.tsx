@@ -29,7 +29,7 @@ export default function Home() {
         <Reveal>
           <Divider />
           <p className="font-script mx-auto max-w-2xl text-center text-2xl leading-relaxed text-primary/90 sm:text-3xl">
-            {invite.welcome} <span className="text-blush">&#10084;</span>
+            {invite.welcome} <span className="text-primary">&#10084;</span>
           </p>
           <Divider />
         </Reveal>

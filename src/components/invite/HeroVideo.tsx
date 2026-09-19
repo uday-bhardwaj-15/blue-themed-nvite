@@ -46,7 +46,7 @@ export function HeroVideo() {
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(180deg, oklch(0.3 0.05 300 / 0.35) 0%, transparent 35%, oklch(0.3 0.05 300 / 0.25) 70%, var(--background) 100%)",
+            "linear-gradient(180deg, oklch(0.25 0.08 250 / 0.4) 0%, transparent 35%, oklch(0.25 0.08 250 / 0.3) 70%, var(--background) 100%)",
         }}
       />
 

@@ -31,15 +31,15 @@ export function EnvelopeGate({ onOpen }: { onOpen: () => void }) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex flex-col items-center justify-center overflow-hidden bg-[oklch(0.96_0.02_15)] select-none"
+      className="fixed inset-0 z-50 flex flex-col items-center justify-center overflow-hidden bg-[oklch(0.97_0.02_240)] select-none"
       style={{
         animation: opening ? "gate-fade-out 750ms ease-in-out 2000ms forwards" : undefined,
         WebkitFontSmoothing: "antialiased",
       }}
     >
-      {/* Ambient background wallpaper & romantic glow (optimized without heavy dynamic filter blur) */}
+      {/* Ambient background wallpaper & romantic blue glow */}
       <div
-        className="pointer-events-none absolute inset-0 bg-cover bg-center opacity-25"
+        className="pointer-events-none absolute inset-0 bg-cover bg-center opacity-30"
         style={{
           backgroundImage: `url(${envelopeBgSrc})`,
           transform: "translate3d(0, 0, 0)",
@@ -51,7 +51,7 @@ export function EnvelopeGate({ onOpen }: { onOpen: () => void }) {
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse at 50% 45%, oklch(0.96 0.02 15 / 0.8) 0%, oklch(0.88 0.05 18 / 0.92) 75%, oklch(0.78 0.07 20 / 0.96) 100%)",
+            "radial-gradient(ellipse at 50% 45%, oklch(0.97 0.02 240 / 0.82) 0%, oklch(0.90 0.05 242 / 0.92) 75%, oklch(0.82 0.08 245 / 0.97) 100%)",
         }}
         aria-hidden="true"
       />
@@ -75,7 +75,7 @@ export function EnvelopeGate({ onOpen }: { onOpen: () => void }) {
       >
         {/* Soft realistic drop shadow under envelope */}
         <div
-          className="absolute -bottom-6 left-[8%] right-[8%] h-10 rounded-[50%] bg-[oklch(0.3_0.1_20/0.35)] blur-lg"
+          className="absolute -bottom-6 left-[8%] right-[8%] h-10 rounded-[50%] bg-[oklch(0.25_0.1_250/0.3)] blur-lg"
           style={{
             transform: opening
               ? "translate3d(0, 10px, 0) scale(1.1)"
@@ -90,9 +90,9 @@ export function EnvelopeGate({ onOpen }: { onOpen: () => void }) {
           aria-hidden="true"
         />
 
-        {/* 1. ENVELOPE BACK WALL & INNER VELVET LINING */}
+        {/* 1. ENVELOPE BACK WALL & INNER ROYAL SAPPHIRE LINING */}
         <div
-          className="absolute inset-0 overflow-hidden rounded-[10px] bg-[#611c2e] shadow-[0_16px_40px_rgba(70,18,30,0.35)] z-1"
+          className="absolute inset-0 overflow-hidden rounded-[10px] bg-[#122849] shadow-[0_16px_40px_rgba(15,35,70,0.35)] z-1"
           style={{
             transform: "translate3d(0, 0, 0px)",
             WebkitTransform: "translate3d(0, 0, 0px)",
@@ -102,17 +102,17 @@ export function EnvelopeGate({ onOpen }: { onOpen: () => void }) {
             className="absolute inset-0"
             style={{
               background:
-                "radial-gradient(circle at 50% 30%, #7d263c 0%, #561727 60%, #3e0e1a 100%)",
+                "radial-gradient(circle at 50% 30%, #1e457e 0%, #132e57 60%, #0c1e38 100%)",
             }}
           />
           {/* Subtle gold inner border */}
-          <div className="absolute inset-2.5 rounded-[6px] border border-[#d4af37]/35 pointer-events-none" />
-          <div className="absolute inset-3.5 rounded-[4px] border border-[#d4af37]/20 pointer-events-none" />
+          <div className="absolute inset-2.5 rounded-[6px] border border-[#d4af37]/40 pointer-events-none" />
+          <div className="absolute inset-3.5 rounded-[4px] border border-[#d4af37]/25 pointer-events-none" />
         </div>
 
         {/* 2. INVITATION CARD (Slides UP out of the pocket when opened) */}
         <div
-          className="absolute inset-x-[5%] bottom-[5%] top-[8%] z-20 overflow-hidden rounded-[8px] bg-[#fffef9] shadow-[0_12px_32px_rgba(70,18,30,0.22)]"
+          className="absolute inset-x-[5%] bottom-[5%] top-[8%] z-20 overflow-hidden rounded-[8px] bg-[#fffefc] shadow-[0_12px_32px_rgba(15,35,70,0.22)]"
           style={{
             animation: opening
               ? "card-emerge 1300ms cubic-bezier(0.16, 1, 0.3, 1) 450ms forwards"
@@ -127,8 +127,8 @@ export function EnvelopeGate({ onOpen }: { onOpen: () => void }) {
           {/* Luxury Card Design */}
           <div className="relative flex h-full flex-col items-center justify-between p-5 text-center sm:p-6">
             {/* Double Gold Card Borders */}
-            <div className="pointer-events-none absolute inset-2.5 rounded-[5px] border border-[#d8b066]/65" />
-            <div className="pointer-events-none absolute inset-3.5 rounded-[3px] border border-[#d8b066]/30" />
+            <div className="pointer-events-none absolute inset-2.5 rounded-[5px] border border-[#d8b066]/75" />
+            <div className="pointer-events-none absolute inset-3.5 rounded-[3px] border border-[#d8b066]/35" />
 
             {/* Header */}
             <div className="pt-1">
@@ -137,39 +137,39 @@ export function EnvelopeGate({ onOpen }: { onOpen: () => void }) {
                 <span className="text-[0.65rem] text-[#d8b066]">✦</span>
                 <span className="h-px w-7 bg-gradient-to-l from-transparent to-[#d8b066]" />
               </div>
-              <p className="font-display text-[0.65rem] tracking-[0.35em] text-[#8e5260] uppercase font-medium">
+              <p className="font-display text-[0.65rem] tracking-[0.35em] text-[#3b5e8c] uppercase font-medium">
                 Wedding Invitation
               </p>
             </div>
 
             {/* Names */}
             <div className="my-auto py-1">
-              <h2 className="font-script text-4xl sm:text-5xl leading-tight text-[#822137]">
+              <h2 className="font-script text-4xl sm:text-5xl leading-tight text-[#163868]">
                 Archit &amp; Inshu
               </h2>
               <div className="mx-auto my-1.5 flex items-center justify-center gap-2">
-                <span className="h-px w-10 bg-[#d8b066]/70" />
-                <span className="font-script text-sm text-[#d8b066]">♥</span>
-                <span className="h-px w-10 bg-[#d8b066]/70" />
+                <span className="h-px w-10 bg-[#d8b066]/75" />
+                <span className="font-script text-sm text-[#d8b066]">🪷</span>
+                <span className="h-px w-10 bg-[#d8b066]/75" />
               </div>
-              <p className="font-display text-[0.7rem] tracking-[0.2em] text-[#6d464f] uppercase">
+              <p className="font-display text-[0.7rem] tracking-[0.2em] text-[#4a6d9b] uppercase">
                 Together with their families
               </p>
             </div>
 
             {/* Date & Venue */}
             <div className="pb-1">
-              <p className="font-display text-xs tracking-[0.25em] text-[#822137] font-semibold">
+              <p className="font-display text-xs tracking-[0.25em] text-[#163868] font-semibold">
                 November 25, 2026
               </p>
-              <p className="font-display text-[0.62rem] tracking-[0.15em] text-[#936671] uppercase mt-0.5">
+              <p className="font-display text-[0.62rem] tracking-[0.15em] text-[#5578a5] uppercase mt-0.5">
                 The Regis Resort, Meerut
               </p>
             </div>
           </div>
         </div>
 
-        {/* 3. FRONT POCKET (Bottom and side flaps of original envelopeBg) */}
+        {/* 3. FRONT POCKET (Bottom and side flaps of powder-blue envelopeBg) */}
         <div
           className="pointer-events-none absolute inset-0 z-25 overflow-hidden rounded-[10px]"
           style={{
@@ -191,9 +191,21 @@ export function EnvelopeGate({ onOpen }: { onOpen: () => void }) {
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(to bottom, transparent 0%, rgba(60,15,25,0.06) 67.5%, transparent 70%)",
+                "linear-gradient(to bottom, transparent 0%, rgba(20,50,90,0.08) 67.5%, transparent 70%)",
             }}
           />
+
+          {/* Front Pocket Inscription matching the reference image */}
+          <div className="absolute bottom-5 left-0 right-0 text-center px-4">
+            <p className="font-script text-[1.1rem] sm:text-[1.25rem] text-[#183d6e] font-medium leading-snug">
+              Grateful to have you in my journey
+            </p>
+            <div className="flex items-center justify-center gap-2 mt-0.5 opacity-85">
+              <span className="h-px w-7 bg-gradient-to-r from-transparent to-[#d8b066]" />
+              <span className="text-[0.6rem] text-[#d8b066]">🪷</span>
+              <span className="h-px w-7 bg-gradient-to-l from-transparent to-[#d8b066]" />
+            </div>
+          </div>
         </div>
 
         {/* 4. TOP FLAP (Folds UPWARDS in 3D around the top hinge axis) */}
@@ -240,51 +252,48 @@ export function EnvelopeGate({ onOpen }: { onOpen: () => void }) {
                 className="absolute left-[-4.35%] top-[-36.5%] h-[228%] w-[108.7%] max-w-none object-cover"
               />
               {/* Flap lighting gradient */}
-              <div className="absolute inset-0 bg-gradient-to-b from-white/15 via-transparent to-black/15" />
+              <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-black/10" />
+
+              {/* Gold cord piping along the diagonal V-edges */}
+              <div
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                  background:
+                    "linear-gradient(to bottom right, rgba(212,175,55,0.7) 1.5px, transparent 1.5px), linear-gradient(to bottom left, rgba(212,175,55,0.7) 1.5px, transparent 1.5px)",
+                }}
+              />
             </div>
 
             {/* WAX SEAL (Mounted on the tip of the top flap) */}
             <div
               className="absolute left-1/2 bottom-0 -translate-x-1/2 translate-y-1/2 select-none"
               style={{
-                width: "96px",
-                height: "96px",
+                width: "98px",
+                height: "98px",
                 animation: opening ? undefined : "soft-float 4s ease-in-out infinite",
                 transform: "translate3d(0, 0, 3px)",
                 WebkitTransform: "translate3d(0, 0, 3px)",
               }}
             >
-              {/* Gold glow behind wax seal */}
+              {/* Gold & blue glow behind wax seal */}
               <div
                 className="absolute inset-0 rounded-full"
                 style={{
                   background:
-                    "radial-gradient(circle, rgba(235,190,95,0.6) 0%, rgba(212,160,50,0.12) 65%, transparent 100%)",
+                    "radial-gradient(circle, rgba(235,190,95,0.5) 0%, rgba(26,60,115,0.2) 65%, transparent 100%)",
                   animation: opening ? undefined : "glow-pulse 3s ease-in-out infinite",
                 }}
                 aria-hidden="true"
               />
 
-              {/* Authentic Golden Wax Seal */}
+              {/* Authentic Royal Sapphire Wax Seal with Gold Lotus */}
               <img
                 src={waxSealSrc}
-                alt="Golden wax seal"
-                width={192}
-                height={192}
-                className="h-full w-full object-contain drop-shadow-[0_4px_10px_rgba(90,40,10,0.5)]"
+                alt="Royal Blue lotus wax seal"
+                width={196}
+                height={196}
+                className="h-full w-full object-contain drop-shadow-[0_5px_12px_rgba(15,35,70,0.55)] rounded-full"
               />
-
-              {/* "Tap to open" Typography on the wax seal */}
-              <span
-                className="font-script absolute inset-0 flex flex-col items-center justify-center text-[1.1rem] leading-[0.88] font-bold text-[#542d06]"
-                style={{
-                  textShadow: "0 1px 1px rgba(255,245,210,0.9), 0 -1px 1px rgba(80,40,0,0.45)",
-                }}
-              >
-                Tap
-                <span className="text-[0.9rem] font-normal leading-[0.85]">to</span>
-                open
-              </span>
             </div>
           </div>
 
@@ -294,18 +303,18 @@ export function EnvelopeGate({ onOpen }: { onOpen: () => void }) {
             style={{
               backfaceVisibility: "hidden",
               WebkitBackfaceVisibility: "hidden",
-              transform: "rotateX(180deg) translate3d(0, 0, 2px)",
-              WebkitTransform: "rotateX(180deg) translate3d(0, 0, 2px)",
+              transform: "rotateX(180deg) translate3d(0, 0, 1px)",
+              WebkitTransform: "rotateX(180deg) translate3d(0, 0, 1px)",
               clipPath: "polygon(0 0, 100% 0, 50% 100%)",
               WebkitClipPath: "polygon(0 0, 100% 0, 50% 100%)",
             }}
           >
-            {/* Velvet rose lining on back face of the opened flap */}
+            {/* Velvet Royal Sapphire lining on back face of the opened flap */}
             <div
               className="h-full w-full"
               style={{
                 background:
-                  "radial-gradient(circle at 50% 100%, #7d263c 0%, #561727 60%, #3e0e1a 100%)",
+                  "radial-gradient(circle at 50% 100%, #1e457e 0%, #132e57 60%, #0c1e38 100%)",
               }}
             />
             {/* Gold piping along the opened flap's diagonal edges */}
@@ -313,7 +322,7 @@ export function EnvelopeGate({ onOpen }: { onOpen: () => void }) {
               className="absolute inset-0"
               style={{
                 background:
-                  "linear-gradient(to bottom right, rgba(212,175,55,0.4) 1px, transparent 1px), linear-gradient(to bottom left, rgba(212,175,55,0.4) 1px, transparent 1px)",
+                  "linear-gradient(to bottom right, rgba(212,175,55,0.5) 1.5px, transparent 1.5px), linear-gradient(to bottom left, rgba(212,175,55,0.5) 1.5px, transparent 1.5px)",
               }}
             />
           </div>
@@ -323,7 +332,7 @@ export function EnvelopeGate({ onOpen }: { onOpen: () => void }) {
       {/* Helper text under envelope */}
       {!opening && (
         <p
-          className="font-display absolute bottom-8 left-0 right-0 text-center text-xs tracking-[0.45em] text-[#8e4557] uppercase font-medium transition-opacity duration-300"
+          className="font-display absolute bottom-8 left-0 right-0 text-center text-xs tracking-[0.45em] text-[#244c80] uppercase font-medium transition-opacity duration-300"
           style={{ animation: "pulse 2.5s ease-in-out infinite" }}
         >
           Tap the seal to open

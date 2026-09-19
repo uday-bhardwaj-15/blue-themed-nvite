@@ -1,9 +1,15 @@
-const petals = Array.from({ length: 16 }, (_, i) => ({
+const petals = Array.from({ length: 18 }, (_, i) => ({
   left: (i * 61) % 100,
   size: 8 + ((i * 7) % 12),
   duration: 14 + ((i * 5) % 12),
   delay: -(i * 1.7),
   drift: ((i % 5) - 2) * 4,
+  color:
+    i % 3 === 0
+      ? "rgba(184, 213, 242, 0.85)"
+      : i % 3 === 1
+        ? "rgba(45, 95, 158, 0.65)"
+        : "rgba(220, 180, 75, 0.8)",
 }));
 
 export function PetalField() {
@@ -12,8 +18,9 @@ export function PetalField() {
       {petals.map((p, i) => (
         <span
           key={i}
-          className="absolute top-0 block rounded-[100%_0_100%_0] bg-blush/70"
+          className="absolute top-0 block rounded-[100%_0_100%_0]"
           style={{
+            backgroundColor: p.color,
             left: `${p.left}%`,
             width: p.size,
             height: p.size * 0.7,
@@ -21,6 +28,7 @@ export function PetalField() {
             willChange: "transform, opacity",
             transform: "translate3d(0, 0, 0)",
             WebkitTransform: "translate3d(0, 0, 0)",
+            boxShadow: i % 3 === 2 ? "0 0 6px rgba(220, 180, 75, 0.4)" : undefined,
             ["--drift" as string]: `${p.drift}vw`,
           }}
         />
