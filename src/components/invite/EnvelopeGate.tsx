@@ -92,10 +92,10 @@ export function EnvelopeGate({ onOpen }: { onOpen: () => void }) {
 
         {/* 1. ENVELOPE BACK WALL & INNER VELVET LINING */}
         <div
-          className="absolute inset-0 overflow-hidden rounded-[10px] bg-[#611c2e] shadow-[0_16px_40px_rgba(70,18,30,0.35)]"
+          className="absolute inset-0 overflow-hidden rounded-[10px] bg-[#611c2e] shadow-[0_16px_40px_rgba(70,18,30,0.35)] z-1"
           style={{
-            transform: "translate3d(0, 0, 0)",
-            WebkitTransform: "translate3d(0, 0, 0)",
+            transform: "translate3d(0, 0, 0px)",
+            WebkitTransform: "translate3d(0, 0, 0px)",
           }}
         >
           <div
@@ -118,8 +118,8 @@ export function EnvelopeGate({ onOpen }: { onOpen: () => void }) {
               ? "card-emerge 1300ms cubic-bezier(0.16, 1, 0.3, 1) 450ms forwards"
               : undefined,
             willChange: opening ? "transform" : undefined,
-            transform: "translate3d(0, 0, 0)",
-            WebkitTransform: "translate3d(0, 0, 0)",
+            transform: "translate3d(0, 0, 8px)",
+            WebkitTransform: "translate3d(0, 0, 8px)",
             backfaceVisibility: "hidden",
             WebkitBackfaceVisibility: "hidden",
           }}
@@ -175,8 +175,8 @@ export function EnvelopeGate({ onOpen }: { onOpen: () => void }) {
           style={{
             clipPath: "polygon(0 0, 50% 67.5%, 100% 0, 100% 100%, 0 100%)",
             WebkitClipPath: "polygon(0 0, 50% 67.5%, 100% 0, 100% 100%, 0 100%)",
-            transform: "translate3d(0, 0, 1px)",
-            WebkitTransform: "translate3d(0, 0, 1px)",
+            transform: "translate3d(0, 0, 12px)",
+            WebkitTransform: "translate3d(0, 0, 12px)",
           }}
         >
           {/* Original envelope background cropped precisely to the pocket */}
@@ -204,13 +204,13 @@ export function EnvelopeGate({ onOpen }: { onOpen: () => void }) {
             WebkitTransformStyle: "preserve-3d",
             transformOrigin: "top center",
             WebkitTransformOrigin: "top center",
-            zIndex: flapOpened ? 10 : 35,
+            zIndex: flapOpened ? 2 : 35,
             animation: opening
               ? "flap-fold-up 900ms cubic-bezier(0.4, 0, 0.2, 1) forwards"
               : undefined,
             willChange: opening ? "transform" : undefined,
-            transform: "translate3d(0, 0, 0)",
-            WebkitTransform: "translate3d(0, 0, 0)",
+            transform: opening ? undefined : "translate3d(0, 0, 15px)",
+            WebkitTransform: opening ? undefined : "translate3d(0, 0, 15px)",
           }}
         >
           {/* Front Face (Visible when envelope is closed) */}

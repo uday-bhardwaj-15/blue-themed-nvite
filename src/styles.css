@@ -169,19 +169,27 @@
 
 @keyframes flap-fold-up {
   0% {
-    transform: translate3d(0, 0, 0) rotateX(0deg);
+    transform: translate3d(0, 0, 15px) rotateX(0deg);
+    z-index: 35;
+  }
+  49% {
+    z-index: 35;
+  }
+  50% {
+    z-index: 2;
   }
   100% {
-    transform: translate3d(0, 0, 0) rotateX(-180deg);
+    transform: translate3d(0, 0, -10px) rotateX(-180deg);
+    z-index: 2;
   }
 }
 
 @keyframes card-emerge {
   0% {
-    transform: translate3d(0, 0, 0) scale(1);
+    transform: translate3d(0, 0, 8px) scale(1);
   }
   100% {
-    transform: translate3d(0, -56%, 0) scale(1.03);
+    transform: translate3d(0, -56%, 8px) scale(1.03);
   }
 }
 
