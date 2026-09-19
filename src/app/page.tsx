@@ -23,7 +23,7 @@ export default function Home() {
       {opened && <PetalField />}
       <MusicToggle started={opened} />
 
-      <HeroVideo />
+      <HeroVideo playing={opened} />
 
       <section className="relative px-6 py-20">
         <Reveal>

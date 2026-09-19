@@ -1,15 +1,16 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import poster from "@/assets/hero-poster.jpg";
-import heroLoop from "@/assets/hero-loop.mp4.asset.json";
 import { invite } from "@/data/invite";
 
 const posterSrc = typeof poster === "string" ? poster : poster.src;
+const videoSrc = "/Wedding_invitation_background_video_1080p_20260919194758.mp4";
 
-export function HeroVideo() {
+export function HeroVideo({ playing = false }: { playing?: boolean }) {
   const [offset, setOffset] = useState(0);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
 
   useEffect(() => {
     let raf = 0;
@@ -30,16 +31,29 @@ export function HeroVideo() {
     };
   }, []);
 
+  useEffect(() => {
+    if (playing && videoRef.current) {
+      videoRef.current.play().catch(() => {
+        // Autoplay policy fallback handled safely
+      });
+    }
+  }, [playing]);
+
   return (
     <section className="relative h-[100svh] overflow-hidden">
       <video
+        ref={videoRef}
         className="absolute inset-0 h-full w-full object-cover"
-        src={heroLoop.url}
+        style={{
+          transform: "translate3d(0, 0, 0)",
+          WebkitTransform: "translate3d(0, 0, 0)",
+        }}
+        src={videoSrc}
         poster={posterSrc}
-        autoPlay
         muted
         loop
         playsInline
+        preload="auto"
       />
 
       <div
