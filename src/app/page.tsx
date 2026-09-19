@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Clock, MapPin } from "lucide-react";
-import { EnvelopeGate } from "@/components/invite/EnvelopeGate";
+import { EnvelopeIntro } from "@/components/invite/EnvelopeIntro";
 import { HeroVideo } from "@/components/invite/HeroVideo";
 import { MusicToggle } from "@/components/invite/MusicToggle";
 import { PetalField } from "@/components/invite/PetalField";
@@ -15,15 +15,54 @@ import { Divider, Reveal, SectionTitle } from "@/components/invite/Reveal";
 import { invite } from "@/data/invite";
 
 export default function Home() {
-  const [opened, setOpened] = useState(false);
+  // "intro" → showing EnvelopeIntro, "fading" → white overlay fading out, "invite" → fully visible
+  const [phase, setPhase] = useState<"intro" | "fading" | "invite">("intro");
+  const [musicStarted, setMusicStarted] = useState(false);
+  // White overlay opacity: 1 while intro plays, fades to 0 over 1s after onComplete
+  const [whiteOpacity, setWhiteOpacity] = useState(1);
+
+  const handleIntroComplete = () => {
+    // Intro is done (white-out already at 1 inside EnvelopeIntro).
+    // Ensure music starts if not already started
+    setMusicStarted(true);
+    // Switch to "fading" so invitation content renders, then fade overlay to 0.
+    setPhase("fading");
+    // Tiny delay to ensure the DOM has painted the invitation before we start fading
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        setWhiteOpacity(0);
+        setTimeout(() => setPhase("invite"), 1000);
+      });
+    });
+  };
 
   return (
     <main className="relative overflow-x-hidden">
-      <EnvelopeGate onOpen={() => setOpened(true)} />
-      {opened && <PetalField />}
-      <MusicToggle started={opened} />
+      {/* Envelope video intro — unmounts after white-out */}
+      {phase === "intro" && (
+        <EnvelopeIntro
+          onStartMusic={() => setMusicStarted(true)}
+          onComplete={handleIntroComplete}
+        />
+      )}
 
-      <HeroVideo playing={opened} />
+      {/* White overlay that persists after EnvelopeIntro unmounts and fades out over 1s */}
+      {(phase === "fading" || phase === "invite") && (
+        <div
+          aria-hidden="true"
+          className="pointer-events-none fixed inset-0 z-40"
+          style={{
+            background: "#ffffff",
+            opacity: whiteOpacity,
+            transition: phase === "fading" ? "opacity 1s ease-out" : "none",
+          }}
+        />
+      )}
+
+      {phase !== "intro" && <PetalField />}
+      <MusicToggle started={musicStarted} />
+
+      <HeroVideo playing={phase !== "intro"} />
 
       <section className="relative px-6 py-20">
         <Reveal>

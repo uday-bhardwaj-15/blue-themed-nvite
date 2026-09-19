@@ -6,25 +6,37 @@ import poster from "@/assets/hero-poster.jpg";
 import { invite } from "@/data/invite";
 
 const posterSrc = typeof poster === "string" ? poster : poster.src;
-const videoSrc = "/Wedding_invitation_background_video_1080p_20260919194758.mp4";
+
+// Desktop: landscape/wide video (1080p)
+const desktopVideoSrc =
+  "/Wedding_invitation_background_video_1080p_20260919194758.mp4";
+// Mobile: portrait/balcony video (vertical-friendly)
+const mobileVideoSrc = "/Marble_balcony_overlooking_sea_20260919202027.mp4";
 
 export function HeroVideo({ playing = false }: { playing?: boolean }) {
   const [offset, setOffset] = useState(0);
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
+  // Detect mobile breakpoint (< 640px = sm)
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 639px)");
+    setIsMobile(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+
   useEffect(() => {
     let raf = 0;
-
     const onScroll = () => {
       cancelAnimationFrame(raf);
-
       raf = requestAnimationFrame(() => {
         setOffset(window.scrollY);
       });
     };
-
     window.addEventListener("scroll", onScroll, { passive: true });
-
     return () => {
       window.removeEventListener("scroll", onScroll);
       cancelAnimationFrame(raf);
@@ -34,19 +46,35 @@ export function HeroVideo({ playing = false }: { playing?: boolean }) {
   useEffect(() => {
     if (playing && videoRef.current) {
       videoRef.current.play().catch(() => {
-        // Autoplay policy fallback handled safely
+        // Autoplay policy fallback — silent
       });
     }
   }, [playing]);
 
+  // When video source changes (mobile ↔ desktop), keep playing state
+  const videoSrc = isMobile ? mobileVideoSrc : desktopVideoSrc;
+
   return (
-    <section className="relative h-[100svh] overflow-hidden">
+    <section className="relative h-[100svh] overflow-hidden bg-[#6a97c7]">
+      {/* Seamless Sky & Ocean Backdrop matching video palette */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(180deg, #6290c0 0%, #7fa9d2 30%, #9bc2e5 60%, var(--background) 100%)",
+        }}
+        aria-hidden="true"
+      />
+
+      {/* Responsive video — mobile uses portrait balcony, desktop uses landscape wedding */}
       <video
+        key={videoSrc}
         ref={videoRef}
-        className="absolute inset-0 h-full w-full object-cover"
+        className="absolute inset-0 m-auto h-full w-full object-cover object-center"
         style={{
           transform: "translate3d(0, 0, 0)",
           WebkitTransform: "translate3d(0, 0, 0)",
+          willChange: "transform",
         }}
         src={videoSrc}
         poster={posterSrc}
@@ -54,13 +82,15 @@ export function HeroVideo({ playing = false }: { playing?: boolean }) {
         loop
         playsInline
         preload="auto"
+        autoPlay={playing}
       />
 
+      {/* Cinematic Vignette Overlay for Typography Contrast */}
       <div
-        className="absolute inset-0"
+        className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "linear-gradient(180deg, oklch(0.25 0.08 250 / 0.4) 0%, transparent 35%, oklch(0.25 0.08 250 / 0.3) 70%, var(--background) 100%)",
+            "linear-gradient(180deg, rgba(15,35,70,0.40) 0%, rgba(15,35,70,0.12) 35%, rgba(15,35,70,0.28) 70%, var(--background) 100%)",
         }}
       />
 
@@ -89,12 +119,6 @@ export function HeroVideo({ playing = false }: { playing?: boolean }) {
           <h2 className="font-script gold-text text-5xl leading-[1.3] py-2 drop-shadow-[0_2px_18px_rgba(0,0,0,0.35)] sm:text-8xl">
             {invite.groom.name}
           </h2>
-
-          {/* <div className="font-display mt-2 space-y-0.5 text-xs text-ivory/90 sm:text-sm">
-            <p>{invite.groom.parents}</p>
-            <p>{invite.groom.education}</p>
-            <p>{invite.groom.title}</p>
-          </div> */}
         </div>
 
         {/* Ampersand */}
@@ -107,7 +131,6 @@ export function HeroVideo({ playing = false }: { playing?: boolean }) {
 
           <div className="font-display  space-y-0.5 text-xs text-ivory/90 sm:text-sm">
             <p>{invite.bride.parents}</p>
-            {/* <p>{invite.bride.education}</p> */}
             <p>{invite.bride.title}</p>
           </div>
         </div>
