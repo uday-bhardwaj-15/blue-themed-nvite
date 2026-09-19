@@ -1,9 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
-import waxSeal from "@/assets/wax-seal.png";
-
-const waxSealSrc = typeof waxSeal === "string" ? waxSeal : waxSeal.src;
 
 // Natural dimensions of public/Gemini_Generated_Image_p4bh5dp4bh5dp4bh.png
 const ENVELOPE_BG = "/Gemini_Generated_Image_p4bh5dp4bh5dp4bh.png";
@@ -11,10 +8,10 @@ const ENVELOPE_NAT_W = 2682;
 const ENVELOPE_NAT_H = 1568;
 const SEAL_X = 0.5055; // Exact center of wax seal on envelope flap
 const SEAL_Y = 0.7241; // Exact vertical center of wax seal
-const SEAL_HEIGHT_RATIO = 0.3724; // 584px / 1568px — matches the exact height of the image wax seal
+const SEAL_HEIGHT_RATIO = 0.32; // Matches the circular wax seal bounds
 
 const VIDEO_LANDSCAPE = "/videos/envelope-open.mp4";
-const VIDEO_PORTRAIT = "/videos/envelope-open-portrait.mp4";
+const VIDEO_PORTRAIT = "/videos/envelope-open.mp4";
 
 type Phase = "idle" | "playing" | "ending" | "done";
 
@@ -94,7 +91,7 @@ export function EnvelopeIntro({ onStartMusic, onComplete }: EnvelopeIntroProps) 
     };
   }, []);
 
-  // Calculate wax seal hotspot location and size to exactly match the background image wax seal
+  // Calculate wax seal hotspot location and size with standard cover scaling
   const computeHotspot = useCallback(() => {
     if (typeof window === "undefined") return;
     const vpW = window.innerWidth;
@@ -107,7 +104,6 @@ export function EnvelopeIntro({ onStartMusic, onComplete }: EnvelopeIntroProps) 
     const offsetX = (vpW - rendW) / 2;
     const offsetY = (vpH - rendH) / 2;
 
-    // Sized to match the exact height of the wax seal in the image
     const size = rendH * SEAL_HEIGHT_RATIO;
 
     setHotspot({
@@ -182,7 +178,7 @@ export function EnvelopeIntro({ onStartMusic, onComplete }: EnvelopeIntroProps) 
     if (!video) return;
     setPhase("playing");
     hasPlayedRef.current = true;
-    // Note: Music will start when envelope video ends as requested
+    // Note: Music will start when envelope video ends
     video.play().catch(() => triggerEnding());
   }, [phase, triggerEnding]);
 
@@ -231,13 +227,13 @@ export function EnvelopeIntro({ onStartMusic, onComplete }: EnvelopeIntroProps) 
         disablePictureInPicture
       />
 
-      {/* Wax Seal Overlay & Hotspot Button (shown in idle state) */}
+      {/* Transparent Golden Glowing Circle over Wax Seal */}
       {hotspot && isIdle && (
         <button
           type="button"
           aria-label="Tap the seal to open the invitation"
           onClick={handleSealTap}
-          className="group absolute rounded-full focus:outline-none transition-transform duration-200 hover:scale-105 active:scale-95"
+          className="group absolute rounded-full focus:outline-none transition-transform duration-300 hover:scale-105 active:scale-95"
           style={{
             left: hotspot.left,
             top: hotspot.top,
@@ -249,20 +245,20 @@ export function EnvelopeIntro({ onStartMusic, onComplete }: EnvelopeIntroProps) 
             touchAction: "manipulation",
           }}
         >
-          {/* Pulsing gold glow ring animation around seal */}
+          {/* Pulsing golden aura ripple & outer gold halo */}
           <div
-            className="absolute inset-0 rounded-full pointer-events-none"
+            className="absolute inset-0 rounded-full border border-[rgba(212,175,55,0.6)] pointer-events-none transition-all duration-300 group-hover:border-[rgba(212,175,55,0.9)]"
             style={{
-              animation: "seal-ring-pulse 2s ease-in-out infinite",
+              background:
+                "radial-gradient(circle, rgba(212, 175, 55, 0.25) 0%, rgba(212, 175, 55, 0.08) 55%, transparent 75%)",
+              animation: "seal-ring-pulse 2.2s ease-in-out infinite",
             }}
           />
 
-          {/* Royal Wax Seal Image */}
-          <img
-            src={waxSealSrc}
-            alt="Royal Wax Seal"
-            className="h-full w-full object-contain drop-shadow-[0_4px_16px_rgba(20,40,80,0.45)] transition-transform duration-200 group-hover:scale-105"
-            draggable={false}
+          {/* Delicate golden inner ring highlight */}
+          <div
+            className="absolute inset-2 rounded-full border border-[rgba(255,235,160,0.35)] pointer-events-none"
+            aria-hidden="true"
           />
         </button>
       )}

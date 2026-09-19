@@ -8,8 +8,7 @@ import { invite } from "@/data/invite";
 const posterSrc = typeof poster === "string" ? poster : poster.src;
 
 // Desktop: landscape/wide video (1080p)
-const desktopVideoSrc =
-  "/Wedding_invitation_background_video_1080p_20260919194758.mp4";
+const desktopVideoSrc = "/Wedding_invitation_background_video_1080p_20260919194758.mp4";
 // Mobile: portrait/balcony video (vertical-friendly)
 const mobileVideoSrc = "/Marble_balcony_overlooking_sea_20260919202027.mp4";
 
