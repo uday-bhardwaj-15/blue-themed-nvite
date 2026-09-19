@@ -167,96 +167,19 @@
 
 /* ---------- Invitation motion system (Hardware-accelerated for iOS & Retina) ---------- */
 
-@keyframes flap-fold-up {
-  0% {
-    transform: translate3d(0, 0, 15px) rotateX(0deg);
-    z-index: 35;
-  }
-  49% {
-    z-index: 35;
+@keyframes seal-ring-pulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 0 rgba(212, 175, 55, 0.75),
+      0 0 15px 2px rgba(212, 175, 55, 0.35),
+      inset 0 0 12px 1px rgba(212, 175, 55, 0.2);
   }
   50% {
-    z-index: 2;
-  }
-  100% {
-    transform: translate3d(0, 0, -10px) rotateX(-180deg);
-    z-index: 2;
-  }
-}
-
-@keyframes card-emerge {
-  0% {
-    transform: translate3d(0, 0, 8px) scale(1);
-  }
-  100% {
-    transform: translate3d(0, -56%, 8px) scale(1.03);
-  }
-}
-
-@keyframes gate-fade-out {
-  0% {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
-  100% {
-    opacity: 0;
-    transform: translate3d(0, -10px, 0);
-    visibility: hidden;
-  }
-}
-
-@keyframes seal-press {
-  0% {
-    transform: scale(1) rotate(0deg);
-  }
-  40% {
-    transform: scale(0.9) rotate(-6deg);
-  }
-  100% {
-    transform: scale(1.9) rotate(8deg);
-    opacity: 0;
-  }
-}
-
-@keyframes flap-open {
-  0% {
-    transform: rotateX(0deg);
-  }
-  100% {
-    transform: rotateX(-178deg);
-  }
-}
-
-@keyframes card-lift {
-  0% {
-    transform: translateY(14%) scale(0.94);
-    opacity: 0;
-  }
-  55% {
-    transform: translateY(-42%) scale(1);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-52%) scale(1.04);
-    opacity: 1;
-  }
-}
-
-@keyframes envelope-away {
-  0% {
-    transform: translateY(0) scale(1);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(34%) scale(1.18);
-    opacity: 0;
-  }
-}
-
-@keyframes gate-out {
-  to {
-    opacity: 0;
-    visibility: hidden;
+    box-shadow:
+      0 0 0 14px rgba(212, 175, 55, 0),
+      0 0 28px 6px rgba(212, 175, 55, 0.55),
+      inset 0 0 18px 3px rgba(212, 175, 55, 0.35);
   }
 }
 
