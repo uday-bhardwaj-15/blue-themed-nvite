@@ -277,22 +277,22 @@ export function EnvelopeGate({ onOpen }: { onOpen: () => void }) {
             >
               {/* Gold & blue glow behind wax seal */}
               <div
-                className="absolute inset-0 rounded-full"
+                className="absolute -inset-2 rounded-full pointer-events-none"
                 style={{
                   background:
-                    "radial-gradient(circle, rgba(235,190,95,0.5) 0%, rgba(26,60,115,0.2) 65%, transparent 100%)",
+                    "radial-gradient(circle, rgba(235,190,95,0.45) 0%, rgba(26,60,115,0.15) 60%, transparent 80%)",
                   animation: opening ? undefined : "glow-pulse 3s ease-in-out infinite",
                 }}
                 aria-hidden="true"
               />
 
-              {/* Authentic Royal Sapphire Wax Seal with Gold Lotus */}
+              {/* Authentic Royal Sapphire Wax Seal with Gold Lotus (Transparent) */}
               <img
                 src={waxSealSrc}
                 alt="Royal Blue lotus wax seal"
                 width={196}
                 height={196}
-                className="h-full w-full object-contain drop-shadow-[0_5px_12px_rgba(15,35,70,0.55)] rounded-full"
+                className="h-full w-full object-contain drop-shadow-[0_6px_14px_rgba(15,35,70,0.55)]"
               />
             </div>
           </div>
